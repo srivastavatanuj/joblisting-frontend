@@ -22,10 +22,10 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div className="homePage">
       <Main data={jobs} />
       <Filters />
-    </>
+    </div>
   );
 };
 

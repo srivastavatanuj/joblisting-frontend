@@ -1,0 +1,97 @@
+.homePage {
+  padding: 3rem;
+}
+
+.mainPage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+  grid-gap: 2rem;
+}
+
+.card {
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px 0px !important;
+  height: 500px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  transform: scale(1.01);
+  transition: all 0.3s;
+}
+
+.card .company_info {
+  display: flex;
+  gap: 1rem;
+}
+
+.card .heading {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #8b8b8b;
+  margin: 0;
+}
+.card .text {
+  margin: 5px 0;
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.card .company_info img {
+  height: 50px;
+  width: 50px;
+}
+
+.card .company_info h3:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.card .company_info p {
+  font-size: 13px;
+  margin: 0;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.card .salary {
+  color: #8b8b8b;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+.card .about {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+  mask-image: linear-gradient(white, transparent);
+}
+
+.card .about h3 {
+  font-weight: 600;
+}
+
+.card .showMore {
+  text-align: center;
+  margin-top: -10px;
+  cursor: pointer;
+  font-weight: 600;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.card .applyButton {
+  border-radius: 10px;
+  padding: 15px;
+  width: 100%;
+  border-width: 0;
+  font-weight: 600;
+  font-size: 15px;
+  background: #55efc4;
+  cursor: pointer;
+}
