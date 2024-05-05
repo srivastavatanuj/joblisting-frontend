@@ -4,8 +4,9 @@
 
 .mainPage {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 2rem;
+  justify-content: center;
 }
 
 .card {
@@ -94,4 +95,44 @@
   font-size: 15px;
   background: #55efc4;
   cursor: pointer;
+}
+
+.descriptonPopupContainer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.descriptonPopup {
+  width: 300px;
+  background: white;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid black;
+}
+
+.descriptonPopup h2 {
+  text-align: center;
+}
+
+.descriptonPopup p {
+  text-align: justify;
+  font-size: 15px;
+}
+
+.descriptonPopup .popupClose {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.descriptonPopup .popupClose:hover {
+  text-decoration: underline;
 }

@@ -1,6 +1,9 @@
+import { useState } from "react";
 import "../Home.css";
 
 const Main = ({ data }) => {
+  const [expandDescription, setExpandDescription] = useState(false);
+
   return (
     <div className="mainPage">
       {data.map((job) => {
@@ -30,7 +33,12 @@ const Main = ({ data }) => {
                 <p className="text">{job.jobDetailsFromCompany}</p>
               </div>
 
-              <p className="showMore">Show More</p>
+              <p
+                className="showMore"
+                onClick={() => setExpandDescription(job.jobDetailsFromCompany)}
+              >
+                Show More
+              </p>
 
               {job.minExp && (
                 <div>
@@ -40,10 +48,29 @@ const Main = ({ data }) => {
               )}
             </div>
 
-            <button className="applyButton">Easy Apply</button>
+            <button
+              className="applyButton"
+              onClick={() => window.open(job.jdLink)}
+            >
+              Easy Apply
+            </button>
           </div>
         );
       })}
+      {expandDescription && (
+        <div className="descriptonPopupContainer">
+          <div className="descriptonPopup">
+            <h2>About</h2>
+            <p>{expandDescription}</p>
+            <span
+              className="popupClose"
+              onClick={() => setExpandDescription(false)}
+            >
+              close
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
