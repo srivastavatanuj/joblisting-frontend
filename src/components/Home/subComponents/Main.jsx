@@ -7,7 +7,6 @@ const Main = ({ data }) => {
   return (
     <div className="mainPage">
       {data.map((job) => {
-        console.log(job);
         return (
           <div className="card" key={job.jdUid}>
             <div>

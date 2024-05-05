@@ -6,12 +6,14 @@ import useApi from "../Api/useApi";
 const Home = () => {
   const { fetchJobDetails } = useApi();
   const [jobs, setJobs] = useState([]);
+  const [page, setPage] = useState(0);
 
-  const fetchJob = async () => {
+  const fetchJob = async (page = 0) => {
     try {
-      const result = await fetchJobDetails();
+      const result = await fetchJobDetails(page);
       const data = JSON.parse(result)["jdList"];
-      setJobs(data);
+
+      setJobs(jobs.concat(data));
     } catch (error) {
       console.log(error);
     }
@@ -20,6 +22,22 @@ const Home = () => {
   useEffect(() => {
     fetchJob();
   }, []);
+
+  useEffect(() => {
+    const handleInfiniteScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight;
+      const heightFromTop = document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+
+      if (heightFromTop + windowHeight >= totalHeight) {
+        setPage(page + 1);
+        fetchJob(page + 1);
+      }
+    };
+    document.addEventListener("scroll", handleInfiniteScroll);
+
+    return () => document.removeEventListener("scroll", handleInfiniteScroll);
+  });
 
   return (
     <div className="homePage">

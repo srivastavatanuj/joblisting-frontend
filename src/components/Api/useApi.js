@@ -1,19 +1,20 @@
 const useApi = () => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
+  const cardLimit = 12;
 
-  const body = JSON.stringify({
-    limit: 12,
-    offset: 0,
-  });
+  const fetchJobDetails = async (page) => {
+    const body = JSON.stringify({
+      limit: cardLimit,
+      offset: cardLimit * page,
+    });
 
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body,
-  };
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body,
+    };
 
-  const fetchJobDetails = async () => {
     return await fetch(
       "https://api.weekday.technology/adhoc/getSampleJdJSON",
       requestOptions
