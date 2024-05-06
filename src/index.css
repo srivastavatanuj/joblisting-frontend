@@ -5,3 +5,22 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
 }
+
+:root {
+  --border-radius-light: 10px;
+  --border-radius-large: 20px;
+
+  --padding-small: 10px;
+  --paddingx-small: 0 10px;
+  --paddingy-small: 10px 0;
+
+  --padding-medium: 15px;
+  --paddingx-medium: 0 15px;
+  --paddingy-medium: 15px 0;
+
+  --text-light: rgb(143, 141, 141);
+
+  --text-size-normal: 15px;
+
+  --filter-border-style: 2px solid silver;
+}

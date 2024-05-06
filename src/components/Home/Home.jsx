@@ -6,7 +6,9 @@ import useApi from "../Api/useApi";
 const Home = () => {
   const { fetchJobDetails } = useApi();
   const [jobs, setJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
   const [page, setPage] = useState(0);
+  const [filters, setFilters] = useState({});
 
   const fetchJob = async (page = 0) => {
     try {
@@ -14,6 +16,7 @@ const Home = () => {
       const data = JSON.parse(result)["jdList"];
 
       setJobs(jobs.concat(data));
+      setFilteredJobs(applyFilters(jobs.concat(data)));
     } catch (error) {
       console.log(error);
     }
@@ -22,6 +25,71 @@ const Home = () => {
   useEffect(() => {
     fetchJob();
   }, []);
+
+  useEffect(() => {
+    setFilteredJobs(applyFilters(jobs));
+  }, [filters]);
+
+  const applyFilters = (jobs = []) => {
+    const newJobs = jobs
+      .filter((job) => {
+        if (filters["role"]?.length == 0 || filters["role"] == undefined) {
+          return job;
+        } else {
+          return filters["role"]?.includes(job.jobRole);
+        }
+      })
+      .filter((job) => {
+        if (filters["minExp"]?.length == 0 || filters["minExp"] == undefined) {
+          return job;
+        } else {
+          return filters["minExp"] <= job.minExp;
+        }
+      })
+      .filter((job) => {
+        if (
+          filters["isRemote"]?.length == 0 ||
+          filters["isRemote"] == undefined
+        ) {
+          return job;
+        } else if (filters["isRemote"] == "remote") {
+          return job.location == "remote";
+        } else {
+          return job;
+        }
+      })
+      .filter((job) => {
+        if (
+          filters["location"]?.length == 0 ||
+          filters["location"] == undefined
+        ) {
+          return job;
+        } else {
+          return filters["location"].includes(job.location);
+        }
+      })
+      .filter((job) => {
+        if (filters["minPay"]?.length == 0 || filters["minPay"] == undefined) {
+          return job;
+        } else {
+          return filters["minPay"] <= job.minJdSalary;
+        }
+      })
+      .filter((job) => {
+        if (
+          filters["companyName"]?.length == 0 ||
+          filters["companyName"] == undefined
+        ) {
+          return job;
+        } else {
+          return job.companyName
+            .toLowerCase()
+            .includes(filters["companyName"].toLowerCase());
+        }
+      });
+
+    return newJobs;
+  };
 
   useEffect(() => {
     const handleInfiniteScroll = () => {
@@ -41,8 +109,8 @@ const Home = () => {
 
   return (
     <div className="homePage">
-      <Filters />
-      <Main data={jobs} />
+      <Filters filters={filters} setFilters={setFilters} />
+      <Main data={filteredJobs} />
     </div>
   );
 };
